@@ -26,6 +26,7 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
+          //Utilizando o Consumer nessa etapa, conseguimos deixar o listen em falso e cirurgiacamente mudamos o botao de favorite
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
               icon: Icon(
