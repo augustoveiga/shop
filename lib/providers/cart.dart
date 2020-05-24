@@ -5,12 +5,14 @@ import './product.dart';
 
 class CartItem {
   final String id;
+  final String productId;
   final String title;
   final int qunatity;
   final double price;
 
   CartItem(
       {@required this.id,
+      @required this.productId,
       @required this.title,
       @required this.price,
       @required this.qunatity});
@@ -43,6 +45,7 @@ class Cart with ChangeNotifier {
         (existingItem) {
           return CartItem(
             id: existingItem.id,
+            productId: product.id,
             title: existingItem.title,
             price: existingItem.price,
             qunatity: existingItem.qunatity + 1,
@@ -53,13 +56,18 @@ class Cart with ChangeNotifier {
       _items.putIfAbsent(
         product.id,
         () => CartItem(
-          id: Random().nextDouble().toString(),
-          title: product.title,
-          qunatity: 1,
-          price: product.price
-        ),
+            id: Random().nextDouble().toString(),
+            productId: product.id,
+            title: product.title,
+            qunatity: 1,
+            price: product.price),
       );
     }
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
     notifyListeners();
   }
 }
