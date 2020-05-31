@@ -44,7 +44,7 @@ class CartItemWidget extends StatelessWidget {
               ),
             ),
             title: Text(cartItem.title),
-            subtitle: Text('R\$${cartItem.price * cartItem.qunatity}'),
+            subtitle: Text('R\$${(cartItem.price * cartItem.qunatity)}'),
             trailing: Text('${cartItem.qunatity}x'),
           ),
         ),
