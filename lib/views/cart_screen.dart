@@ -45,7 +45,11 @@ class CartScreen extends StatelessWidget {
                     child: Text('COMPRAR'),
                     textColor: Theme.of(context).primaryColor,
                     onPressed: () {
-                      Provider.of<Orders>(context,listen: false).addOrder(cartItems, cart.totalAmount);
+                      Provider.of<Orders>(context, listen: false).addOrder(
+                        cartItems,
+                        cart.totalAmount,
+                      );
+                      cart.clear();
                     },
                   ),
                 ],
@@ -57,7 +61,7 @@ class CartScreen extends StatelessWidget {
             child: ListView.builder(
               itemCount: cart.itemsCount,
               itemBuilder: (ctx, i) => CartItemWidget(cartItems[i]),
-              ),
+            ),
           )
         ],
       ),
