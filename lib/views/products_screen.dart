@@ -5,6 +5,7 @@ import '../providers/products.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/product_item.dart';
+import '../utils/app_routes.dart';
 
 //CRUDE
 
@@ -20,7 +21,9 @@ class ProductsScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.PRODUCT_FORM);
+            },
           ),
         ],
       ),
