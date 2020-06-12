@@ -90,7 +90,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final index = _items.indexWhere((prod) => prod.id == prod.id);
+    final index = _items.indexWhere((prod) => prod.id == id);
     if (index >= 0) {
       final product = _items[index];
       _items.remove(product);
@@ -101,7 +101,7 @@ class Products with ChangeNotifier {
       if (response.statusCode >= 400) {
         _items.insert(index, product);
         notifyListeners();
-        throw HttpException('Ocorreu um erro na exclusao do prodito.');
+        throw HttpException('Ocorreu um erro na exclusao do produto.');
       }
     }
   }
