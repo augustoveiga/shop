@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop/utils/constantes.dart';
 
 class Product with ChangeNotifier {
   final String id;
@@ -30,7 +31,7 @@ class Product with ChangeNotifier {
 
     try {
       final url =
-          'https://flutter-atveiga-shop.firebaseio.com/products/$id.json';
+          '${Constantes.BASE_API_URL}/products/$id.json';
 
       final response = await http.patch(
         url,
