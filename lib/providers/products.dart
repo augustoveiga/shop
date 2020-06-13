@@ -9,8 +9,9 @@ class Products with ChangeNotifier {
   final String _baseUrl = '${Constantes.BASE_API_URL}/products';
   List<Product> _items = [];
   String _token;
+  String _userId;
 
-  Products(this._token, this._items);
+  Products([this._token, this._userId, this._items = const []]);
 
   List<Product> get items => [..._items];
 
@@ -26,16 +27,20 @@ class Products with ChangeNotifier {
     final response = await http.get("$_baseUrl.json?auth=$_token");
     Map<String, dynamic> data = json.decode(response.body);
 
+    final favResponse = await http.get("${Constantes.BASE_API_URL}/userFavorites/$_userId.json?auth=$_token");
+    final favMap = json.decode(favResponse.body);
+
     _items.clear();
     if (data != null) {
       data.forEach((productID, productData) {
+        final isFavorite = favMap == null ? false : favMap[productID] ?? false;
         _items.add(Product(
           id: productID,
           title: productData['title'],
           price: productData['price'],
           description: productData['description'],
           imageUrl: productData['imageUrl'],
-          isFavorite: productData['isFavorite'],
+          isFavorite: isFavorite,
         ));
       });
       notifyListeners();

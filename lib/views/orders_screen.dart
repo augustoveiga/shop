@@ -6,7 +6,6 @@ import '../providers/orders.dart';
 import '../widgets/order_widget.dart';
 
 class OrderScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +17,12 @@ class OrderScreen extends StatelessWidget {
           future: Provider.of<Orders>(context, listen: false).loadOrders(),
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.amber,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
+                ),
+              );
             } else if (snapshot.error != null) {
               return Center(child: Text('Ocorreu um erro!'));
             } else {

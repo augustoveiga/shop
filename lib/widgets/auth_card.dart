@@ -142,7 +142,10 @@ class _AuthCardState extends State<AuthCard> {
                 ),
               Spacer(),
               if (_isLoading)
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                  backgroundColor: Colors.amber,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
+                )
               else
                 RaisedButton(
                   shape: RoundedRectangleBorder(
